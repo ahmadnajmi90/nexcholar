@@ -15,7 +15,7 @@ export default function Sidebar({ isCollapsed }) {
                 {isCollapsed ? (
                     <span>AP</span> // Short form for Admin Panel or Academician Panel
                 ) : (
-                    <span>{userType === 'admin' ? 'Nexscholar' : 'Academician Panel'}</span>
+                    <span>{userType === 'admin' ? 'Nexscholar' : 'Academician'}</span>
                 )}
             </div>
 
