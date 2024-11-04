@@ -8,7 +8,7 @@ export default function Dashboard({ userType }) {
            <Head title="Dashboard" />
 
 <div className="p-4 bg-white rounded-lg shadow">
-    <h1 className="text-2xl font-semibold">Dashboard { userType }</h1>
+    <h1 className="text-2xl font-semibold">Welcome { userType }</h1>
     <p className="mt-4">You're logged in!</p>
 </div>
         </AdminLayout>
