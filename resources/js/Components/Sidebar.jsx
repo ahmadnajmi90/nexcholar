@@ -29,7 +29,7 @@ export default function Sidebar({ isCollapsed }) {
 
                     <>
                         <Link href={route('admin.users')} className="py-2 px-3 hover:bg-gray-700 rounded">
-                            {!isCollapsed && <span>Managgrgrgr Users</span>}
+                            {!isCollapsed && <span>Mana Users</span>}
                         </Link>
                         <Link href={route('users.index')} className="py-2 px-3 hover:bg-gray-700 rounded">
                             {!isCollapsed && <span>User Management</span>}
