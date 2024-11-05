@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('academicians', function (Blueprint $table) {
-            $table->string('academician_id')->nullable()->unique()->after('id'); // Adjust as necessary
-        });
+        // Schema::table('academicians', function (Blueprint $table) {
+        //     $table->string('academician_id')->nullable()->unique()->after('id'); // Adjust as necessary
+        // });
     }
 
     /**
