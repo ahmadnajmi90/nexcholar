@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -41,5 +42,41 @@ class UserController extends Controller
     ])->with('layout', 'UserLayout'); // Ensure the layout is consistent
 
     }
+
+    public function loadEditForm($user_id){
+
+        $user = auth()->user();
+        $userDetails = User::find($user_id);
+
+      return Inertia::render('Users/EditForm', [
+        'user' => $user,
+        'userDetails' => $userDetails, // Pass the user details to the view
+    ])->with('layout', 'UserLayout'); // Ensure the layout is consistent
+      }
+
+
+    public function updateUser(Request $request, $user_id)
+    {
+        // Validate the request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        // Find the user by ID and update their details
+        $user = User::find($user_id);
+
+        if ($user) {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+
+            return redirect()->route('users.index')->with('success', 'User details updated successfully.');
+        }
+
+        return redirect()->route('users.index')->with('error', 'User not found.');
+    }
+
 
 }
