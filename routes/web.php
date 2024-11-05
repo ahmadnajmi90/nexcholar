@@ -29,10 +29,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
         Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
         Route::get('/users', [UserController::class, 'loadUsers'])->name('users.index');
-        Route::get('/edit/user/{user_id}', [UserController::class, 'loadEditForm'])->name('users.edit');
-        Route::post('/update/user/{user_id}', [UserController::class, 'updateUser'])->name('users.update');
-        Route::get('/delete/user/{user_id}', [UserController::class, 'deleteUser'])->name('users.delete');
-
     });
 });
 
