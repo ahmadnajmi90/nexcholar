@@ -32,7 +32,7 @@ function EditForm({userDetails}) {
         onChange = {(e) => setData('id', e.target.value)}
         />
     <div>
-      <label htmlFor="name" className="sr-only">Name</label>
+      <label htmlFor="name" className="sr-only">Nam</label>
 
       <div >
         <TextInput className="w-full" placeholder="Name "
