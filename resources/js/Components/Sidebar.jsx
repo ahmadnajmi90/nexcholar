@@ -1,149 +1,89 @@
+import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
+import { HomeIcon, UserGroupIcon, Cog6ToothIcon, UserIcon, ArrowLeftOnRectangleIcon, Bars3Icon } from '@heroicons/react/24/outline';
 
-export default function Sidebar({ isCollapsed }) {
+export default function Sidebar() {
     const { auth } = usePage().props;
-    const userType = auth.user ? auth.user.user_type : 'Guest'; // Default to 'Guest' if not logged in
+    const userType = auth.user ? auth.user.user_type : 'Guest';
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
-    console.log("User Type:", userType); // Print userType in the console for debugging
-
-
+    const toggleCollapse = () => setIsCollapsed(!isCollapsed);
 
     return (
-        <div className={`bg-gray-800 text-white h-full ${isCollapsed ? 'w-20' : 'w-64'} fixed left-0 top-0 flex flex-col p-4 transition-width duration-300 ease-in-out`}>
-            {/* Sidebar Header */}
-            <div className="text-xl font-semibold mb-4 flex items-center justify-center">
-                {isCollapsed ? (
-                    <span>AP</span> // Short form for Admin Panel or Academician Panel
-                ) : (
-                    <span>{userType === 'admin' ? 'Nexscholar' : 'Academician'}</span>
-                )}
+        <div className={`bg-white h-full ${isCollapsed ? 'w-20' : 'w-64'} fixed left-0 top-0 flex flex-col transition-all duration-300 ease-in-out`}>
+            {/* Sidebar Header with Toggle Button */}
+            <div className="flex items-center justify-between p-4">
+                <div className="flex items-center">
+                    {/* Toggle Button */}
+                    <button onClick={toggleCollapse} className="focus:outline-none hover:bg-gray-200 p-1 rounded-full">
+                        <Bars3Icon className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${isCollapsed ? 'rotate-180' : ''}`} />
+                    </button>
+                    {/* Header Text */}
+                    {!isCollapsed && <span className="ml-3 text-xl font-semibold text-gray-800">Nexscholar</span>}
+                </div>
             </div>
 
             {/* Sidebar Links */}
             <nav className="flex flex-col space-y-1">
-                <Link href={route('dashboard')} className="py-2 px-3 hover:bg-gray-700 rounded">
-                    {!isCollapsed && <span>Dashboard</span>}
+                <Link href={route('dashboard')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
+                    <HomeIcon className="h-5 w-5 text-gray-600" />
+                    <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Dashboard</span>
                 </Link>
-                {/* Academician-Specific Links */}
-                {userType === 'admin' && (
 
+                {userType === 'admin' && (
                     <>
-                        <Link href={route('admin.users')} className="py-2 px-3 hover:bg-gray-700 rounded">
-                            {!isCollapsed && <span>Manage Users</span>}
+                        <Link href={route('admin.users')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
+                            <UserGroupIcon className="h-5 w-5 text-gray-600" />
+                            <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Manage Users</span>
                         </Link>
-                        <Link href={route('users.index')} className="py-2 px-3 hover:bg-gray-700 rounded">
-                            {!isCollapsed && <span>User Management</span>}
+                        <Link href={route('users.index')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
+                            <UserIcon className="h-5 w-5 text-gray-600" />
+                            <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>User Management</span>
                         </Link>
-                        <Link href={route('admin.settings')} className="py-2 px-3 hover:bg-gray-700 rounded">
-                            {!isCollapsed && <span>Settings</span>}
+                        <Link href={route('admin.settings')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
+                            <Cog6ToothIcon className="h-5 w-5 text-gray-600" />
+                            <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Settings</span>
                         </Link>
                     </>
                 )}
 
-
-                {/* Academician-Specific Links */}
                 {userType === 'Academician' && (
                     <>
-                         <Link href={route('admin.users')} className="py-2 px-3 hover:bg-gray-700 rounded">
-                            {!isCollapsed && <span>Mans</span>}
+                        <Link href={route('admin.users')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
+                            <UserGroupIcon className="h-5 w-5 text-gray-600" />
+                            <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Mans</span>
                         </Link>
-                        <Link href={route('users.index')} className="py-2 px-3 hover:bg-gray-700 rounded">
-                            {!isCollapsed && <span>Userement</span>}
+                        <Link href={route('users.index')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
+                            <UserIcon className="h-5 w-5 text-gray-600" />
+                            <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Userement</span>
                         </Link>
-                        <Link href={route('academician.edit')} className="py-2 px-3 hover:bg-gray-700 rounded">
-                            Edit Profile
+                        <Link href={route('academician.edit')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
+                            <UserIcon className="h-5 w-5 text-gray-600" />
+                            <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Edit Profile</span>
                         </Link>
                     </>
                 )}
 
                 {/* Common Links */}
-                <Link href={route('profile.edit')} className="py-2 px-3 hover:bg-gray-700 rounded">
-                    {!isCollapsed && <span>Profile</span>}
+                <Link href={route('profile.edit')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
+                    <UserIcon className="h-5 w-5 text-gray-600" />
+                    <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Profile</span>
                 </Link>
                 <Link
                     href={route('logout')}
                     method="post"
                     as="button"
-                    className="py-2 px-3 w-full text-left hover:bg-gray-700 rounded"
+                    className="py-2 px-3 w-full text-left hover:bg-gray-200 rounded flex items-center"
                 >
-                    {!isCollapsed && <span>Log Out</span>}
+                    <ArrowLeftOnRectangleIcon className="h-5 w-5 text-gray-600" />
+                    <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Log Out</span>
                 </Link>
             </nav>
 
-            {/* Optional Footer or Additional Links */}
+            {/* Optional Footer */}
             <div className="mt-auto space-y-1">
-                {/* You can add any additional information or links here */}
+                {/* Additional links or information can go here */}
             </div>
         </div>
     );
 }
-
-
-
-
-// import { Link, usePage } from '@inertiajs/react';
-
-// export default function Sidebar({ isCollapsed }) {
-//     const { auth } = usePage().props;
-//     const userType = auth.user ? auth.user.user_type : 'Guest'; // Default to 'Guest' if not logged in
-
-//     console.log("User Type:", userType); // Print userType in the console for debugging
-
-//     return (
-//         <div className={`bg-gray-800 text-white h-full ${isCollapsed ? 'w-20' : 'w-64'} fixed left-0 top-0 flex flex-col p-4 transition-width duration-300 ease-in-out`}>
-//             {/* Sidebar Header */}
-//             <div className="text-xl font-semibold mb-4 flex items-center justify-center">
-//                 {isCollapsed ? (
-//                     <span>AP</span> // Short form for Admin Panel
-//                 ) : (
-//                     <span>{userType === 'admin' ? 'Admin Panel' : 'Academician Panel'}</span>
-//                 )}
-//             </div>
-
-//             {/* Print userType directly on the sidebar */}
-//             <div className="mb-4 text-sm text-gray-400 text-center">
-//                 User Type: {userType}
-//             </div>
-
-//             {/* Sidebar Links */}
-//             <nav className="flex flex-col space-y-1">
-//                 <Link href={route('dashboard')} className="py-2 px-3 hover:bg-gray-700 rounded">
-//                     {!isCollapsed && <span>Dashboard</span>}
-//                 </Link>
-
-//            {/* Academician-Specific Links */}
-//            {userType === 'admin' && (
-
-//                     <>
-//                         <Link href={route('admin.users')} className="py-2 px-3 hover:bg-gray-700 rounded">
-//                             {!isCollapsed && <span>Manage Users</span>}
-//                         </Link>
-//                         <Link href={route('users.index')} className="py-2 px-3 hover:bg-gray-700 rounded">
-//                             {!isCollapsed && <span>User Management</span>}
-//                         </Link>
-//                         <Link href={route('admin.settings')} className="py-2 px-3 hover:bg-gray-700 rounded">
-//                             {!isCollapsed && <span>Settings</span>}
-//                         </Link>
-//                     </>
-//                 )}
-
-//                 {/* Admin-Specific Links */}
-//                 {userType === 'Academician' && (
-//                     <>
-//                         <Link href={route('admin.users')} className="py-2 px-3 hover:bg-gray-700 rounded">
-//                             {!isCollapsed && <span>Research</span>}
-//                         </Link>
-//                         <Link href={route('users.index')} className="py-2 px-3 hover:bg-gray-700 rounded">
-//                             {!isCollapsed && <span>Research</span>}
-//                         </Link>
-//                         <Link href={route('admin.settings')} className="py-2 px-3 hover:bg-gray-700 rounded">
-//                             {!isCollapsed && <span>Research</span>}
-//                         </Link>
-//                     </>
-//                 )}
-
-
-//             </nav>
-//         </div>
-//     );
-// }
