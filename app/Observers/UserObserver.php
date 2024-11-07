@@ -5,6 +5,8 @@ namespace App\Observers;
 use App\Models\User;
 use App\Models\Academician;
 use Illuminate\Support\Str; // Add this line
+use Illuminate\Support\Facades\Log;
+
 
 
 class UserObserver
@@ -14,13 +16,19 @@ class UserObserver
      */
     public function created(User $user): void
     {
+       // Only insert into the academicians table if the user_type is 'Academician'
+    if ($user->user_type === 'Academician') {
+        Log::info('User unique_id: ' . $user->unique_id);
+
         Academician::create([
             'user_id' => $user->id,
-            'academician_id' => 'ACAD-' . Str::random(8), // Generate a unique academician_id
+            'academician_id' => $user->unique_id, // Use the unique_key from users as academician_id
             'email' => $user->email,
             'full_name' => $user->name,
             // Additional fields if necessary
         ]);
+    }
+
     }
 
     /**
