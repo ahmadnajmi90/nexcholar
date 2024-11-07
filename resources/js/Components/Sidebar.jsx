@@ -57,7 +57,7 @@ export default function Sidebar() {
                             <UserIcon className="h-5 w-5 text-gray-600" />
                             <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Userement</span>
                         </Link>
-                        <Link href={route('academician.edit')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
+                        <Link href={route('academician.editP')} className="py-2 px-3 hover:bg-gray-200 rounded flex items-center">
                             <UserIcon className="h-5 w-5 text-gray-600" />
                             <span className={`${isCollapsed ? 'hidden' : 'ml-3'}`}>Edit Profile</span>
                         </Link>
