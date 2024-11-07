@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -42,6 +43,13 @@ class RegisteredUserController extends Controller
             'gov_agency' => 'nullable|string|required_if:user_type,Government Agency', // Updated to match database column
         ]);
 
+            // Generate unique_key only for academicians
+    $unique_id = null;
+    if ($request->user_type === 'Academician') {
+        $unique_id = 'ACAD-' . Str::random(8);
+    }
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -49,6 +57,7 @@ class RegisteredUserController extends Controller
             'user_type' => $request->user_type, // Updated to match database column
             'university' => $request->university,
             'gov_agency' => $request->gov_agency, // Updated to match database column
+            'unique_id' => $unique_id,
         ]);
 
         event(new Registered($user));
