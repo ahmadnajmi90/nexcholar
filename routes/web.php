@@ -39,8 +39,8 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/academician/edit', [AcademicianController::class, 'edit'])->name('academician.edit');
-    Route::post('/academician/update', [AcademicianController::class, 'update'])->name('academician.update');
+    Route::get('/academician/editP', [AcademicianController::class, 'editP'])->name('academician.editP');
+    Route::post('/academician/updateP', [AcademicianController::class, 'updateP'])->name('academician.updateP');
 });
 
 //route
