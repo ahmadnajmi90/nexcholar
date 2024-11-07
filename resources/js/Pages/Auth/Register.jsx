@@ -90,7 +90,7 @@ export default function Register() {
                         required
                     >
                         <option value="">Select Role</option>
-                        <option value="PhD Student">PhD Student</option>
+                        <option value="Postgraduate">Postgraduate</option>
                         <option value="Academician">Academician</option>
                         <option value="Researcher">Researcher</option>
                         <option value="Industry">Industry</option>
