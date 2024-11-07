@@ -8,26 +8,22 @@ use App\Models\Academician;
 
 class AcademicianController extends Controller
 {
-    public function edit()
+    public function editP()
     {
-
-        // $user = auth()->user();
-        // $academician = Academician::where('user_id', $user->id)->firstOrFail();
-
-        $academician = auth()->user(); // Assuming the user is an academician
+        $academician = auth()->user();
         return Inertia::render('Academician/EditProfile', [
             'academician' => $academician,
         ]);
     }
 
-    public function update(Request $request)
+    public function updateP(Request $request)
     {
         $academician = auth()->user();
 
         $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            // Add other validation rules here
+            // Add validation rules for other fields
         ]);
 
         // Update fields
