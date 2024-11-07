@@ -11,7 +11,7 @@ class AcademicianObserver
      */
     public function created(Academician $academician): void
     {
-        $academician->academician_id = 'ACAD-' . Str::random(8);
+       // $academician->academician_id = 'ACAD-' . Str::random(8);
     }
 
     /**
